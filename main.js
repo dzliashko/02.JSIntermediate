@@ -1,10 +1,12 @@
-function makeAdder(x) {
-    return function add(y) {
-        return x + y
+const counter = (function () {
+    // Create private state and return { increment, value }.
+    let count = 0
+    return {
+        increment: () => ++count,
+        value: () => count
     }
-}
+})();
 
-const lines = require('fs').readFileSync(0, 'utf-8').trim().split('\n');
-const x = Number(lines[0]);
-const y = Number(lines[1]);
-console.log(makeAdder(x)(y));
+const n = Number(require('fs').readFileSync(0, 'utf-8').trim());
+for (let i = 0; i < n; i++) counter.increment();
+console.log(counter.value());
