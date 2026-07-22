@@ -1,14 +1,10 @@
-function makeCounter() {
-    // Use a let binding inside this function and return a function
-    // that increments and returns it.
-    let a = 0
-    function f() {
-        a++
-        return a
+function makeAdder(x) {
+    return function add(y) {
+        return x + y
     }
-    return f
 }
 
-const n = Number(require('fs').readFileSync(0, 'utf-8').trim());
-const counter = makeCounter();
-for (let i = 0; i < n; i++) console.log(counter());
+const lines = require('fs').readFileSync(0, 'utf-8').trim().split('\n');
+const x = Number(lines[0]);
+const y = Number(lines[1]);
+console.log(makeAdder(x)(y));
